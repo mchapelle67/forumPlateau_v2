@@ -1,29 +1,5 @@
-<?php 
-$pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS);
-$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
-
-$hash = password_hash($password, PASSWORD_DEFAULT);
-$user = user dans bdd;
-
-faire INSERT INTO user 
-
-sesssion start dans quel fichier ?? 
-
-$user c où ? 
-
-// se connecter à la session
-if(password_verify($password, $hash)){
-    $_SESSION['user'] = $user;
-} else {
-    echo "Erreur de mot de passe ou d'e-mail. Veuillez réessayer"; (mettre fenêtre pop up JS)
-}
-
-ajouter filtre email 
-pour se deonnecter = unset($_SESSION["session ?? "]);
-?>
-
 <section class="inscription-form">
-    <form action="" method="POST">
+    <form action="/manon_CHAPELLE/forumPlateau_V2/index.php?ctrl=security&action=register" method="POST">
         <h3>Rejoindre la communauté.</h3>
             <label for="pseudo">Pseudo</label>
                 <input type="text" name="pseudo" id="pseudo" required>

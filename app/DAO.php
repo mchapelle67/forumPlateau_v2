@@ -13,7 +13,7 @@ namespace App;
 abstract class DAO{
 
     private static $host   = 'mysql:host=127.0.0.1;port=3306';
-    private static $dbname = 'forummvc_v2';
+    private static $dbname = 'forum';
     private static $dbuser = 'root';
     private static $dbpass = '';
 
@@ -36,10 +36,10 @@ abstract class DAO{
         );
     }
 
-    public static function insert($sql){
+    public static function insert($sql, $params){
         try{
             $stmt = self::$bdd->prepare($sql);
-            $stmt->execute();
+            $stmt->execute($params);
             //on renvoie l'id de l'enregistrement qui vient d'être ajouté en base, 
             //pour s'en servir aussitôt dans le controleur
             return self::$bdd->lastInsertId();
