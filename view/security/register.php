@@ -10,8 +10,8 @@
             <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required>
                 
-                <label for="password">Vérifier mot de passe</label>
-                    <input type="password" name="password" id="password" required>
+                <label for="passwordVerify">Vérifier mot de passe</label>
+                    <input type="password" name="passwordVerify" id="passwordVerify" required>
 
         <input type="submit" value="S'INSCRIRE">
     </form>

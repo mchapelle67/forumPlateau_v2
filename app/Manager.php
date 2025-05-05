@@ -42,6 +42,10 @@ abstract class Manager{
         );
     }
 
+    public function findOneByEmail($email){
+        
+    }
+
     //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];
 
     public function add($data){
