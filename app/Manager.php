@@ -43,7 +43,13 @@ abstract class Manager{
     }
 
     public function findOneByEmail($email){
-        
+        $sql = "SELECT * FROM user WHERE email = :email";
+        return DAO::select($sql, ['email' => $email], false);
+    }
+
+    public function findOneByPseudo($pseudo){
+        $sql = "SELECT * FROM user WHERE pseudo = :pseudo";
+        return DAO::select($sql, ['pseudo' => $pseudo], false);
     }
 
     //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];

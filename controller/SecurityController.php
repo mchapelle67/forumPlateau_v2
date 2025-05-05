@@ -6,6 +6,8 @@ use App\ControllerInterface;
 use App\Autoloader;
 use App\DAO;
 use App\Session;
+use App\Manager;
+use Model\Managers\UserManager;
 
 // se connecter à la session
 // if(password_verify($password, $hash)){
@@ -34,18 +36,15 @@ class SecurityController extends AbstractController{
         // hashage du password
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        // on intègre le tout dans une variable
-        $data = ['pseudo' => $pseudo, 'password' => $hash, 'email' => $email];
+        // on instencie un nouvel user 
+        $user = new UserManager();
 
         // on verifie si les données saisis sont déjà présentes dans la bdd
-        $sqlEmail = "SELECT * FROM user WHERE email = :email";
-        $sqlPseudo = "SELECT * FROM user WHERE pseudo = :pseudo";
-
-        $emailExists = DAO::select($sqlEmail, ['email' => $email], false);
-        $pseudoExists = DAO::select($sqlPseudo, ['pseudo' => $pseudo], false);
+        $verifyEmail = $user->findOneByEmail($email);
+        $verifyPseudo = $user->findOneByPseudo($pseudo);
 
         // on affiche un message d'erreur si c'est le cas ou si les mdp ne sont pas identiques 
-        if (($emailExists) || ($pseudoExists)) {
+        if (($verifyEmail) || ($verifyPseudo)) {
         Session::addFlash("error", "Utilisateur déjà associé à l'email ou au pseudo.");
             $this->redirectTo("register");
         } elseif ($password != $passwordVerify) {
@@ -53,7 +52,7 @@ class SecurityController extends AbstractController{
             $this->redirectTo("register");  
         } else {
             // si aucune donnée n'est déjà présente, on poursuit l'inscription
-            if ((!$emailExists && !$pseudoExists) && ($password === $passwordVerify))
+            if ((!$verifyEmail && !$verifyPseudo) && ($password === $passwordVerify))
                 // inserer dans la bdd
                 $sql = "INSERT INTO user (pseudo, email, password, profilCreation) VALUES (:pseudo, :email, :password, NOW())";
 
