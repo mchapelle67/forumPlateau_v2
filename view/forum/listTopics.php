@@ -1,5 +1,5 @@
 <?php
-var_dump($result);
+
     $category = $result["data"]['category']; 
     $topics = $result["data"]['topics']; 
     $users = $result["data"]['users'];
