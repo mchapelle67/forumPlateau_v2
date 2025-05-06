@@ -10,9 +10,9 @@
             <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required>
                 
-                <label for="passwordVerify">Vérifier mot de passe</label>
-                    <input type="password" name="passwordVerify" id="passwordVerify" required>
+                <label for="password2">Vérifier mot de passe</label>
+                    <input type="password" name="password2" id="password2" required>
 
-        <input type="submit" value="S'INSCRIRE">
+        <input type="submit" name="submit" value="S'INSCRIRE">
     </form>
 </section>

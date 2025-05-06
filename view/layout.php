@@ -26,6 +26,10 @@
                             <a href="/">Créer contenus</a>
                             <a href="/">Rechercher</a>
                             <img src="public/img/icones/search.svg" alt="loupe de recherche">
+                            <?php
+                            if(App\Session::getUser()){                                 
+                                $user = App\Session::getUser(); ?>
+                            <p><?php echo $user->getPseudo(); } ?></p>       
                             <img src="public/img/icones/user.svg" alt="logo admin"></a>
                         </div>
                     </nav>

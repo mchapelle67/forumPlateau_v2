@@ -4,6 +4,7 @@ namespace App;
 class Session{
 
     private static $categories = ['error', 'success'];
+    private $pseudo;
 
     /**
     *   ajoute un message en session, dans la catégorie $categ
@@ -44,4 +45,10 @@ class Session{
         }
         return false;
     }
+
+    public function getPseudo() {
+        return $this->pseudo;
+    }
 }
+
+// pour se deonnecter = unset($_SESSION["session ?? "]);

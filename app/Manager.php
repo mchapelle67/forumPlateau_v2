@@ -2,6 +2,8 @@
 namespace App;
 
 abstract class Manager{
+    
+    protected $className = "User";
 
     protected function connect(){
         DAO::connect();
@@ -44,13 +46,21 @@ abstract class Manager{
 
     public function findOneByEmail($email){
         $sql = "SELECT * FROM user WHERE email = :email";
-        return DAO::select($sql, ['email' => $email], false);
+        $result = DAO::select($sql, ['email' => $email], false); // false = une seule ligne
+
+        if ($result) {
+            return new $this->className($result); // new User($result)
+        }
+
+        return null;
     }
 
     public function findOneByPseudo($pseudo){
-        $sql = "SELECT * FROM user WHERE pseudo = :pseudo";
+        $sql = "SELECT pseudo FROM user WHERE pseudo = :pseudo";
         return DAO::select($sql, ['pseudo' => $pseudo], false);
     }
+
+
 
     //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];
 
@@ -69,7 +79,7 @@ abstract class Manager{
             INSERT INTO user (username,password,email) VALUES ('Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com') 
         */
         try{
-            return DAO::insert($sql);
+            return DAO::insert($sql, $data);
         }
         catch(\PDOException $e){
             echo $e->getMessage();

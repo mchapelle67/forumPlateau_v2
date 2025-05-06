@@ -9,8 +9,11 @@ use App\Entity;
 
 final class User extends Entity{
 
+    // attributs 
     private $id;
     private $nickName;
+    private $password;
+    private $pseudo;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -53,5 +56,42 @@ final class User extends Entity{
 
     public function __toString() {
         return $this->nickName;
+    }
+
+    /**
+     * Get the value of pseudo
+     */ 
+    public function getPseudo(){
+        return $this->pseudo;
+    }
+
+    /**
+     * Set the value of nickName
+     *
+     * @return  self
+     */ 
+    public function setPseudo($pseudo){
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword(){
+        return $this->password;
+    }
+
+    /**
+     * Set the value of nickName
+     *
+     * @return  self
+     */ 
+    public function setPassword($password){
+        $this->password = $password;
+
+        return $this;
     }
 }

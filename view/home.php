@@ -30,15 +30,15 @@
     </div>
 
 <section class="connexion-form">
-    <form action="" method="">
+    <form action="index.php?ctrl=security&action=login" method="POST">
         <h3>Accéder aux contenus</h3>
-            <label for="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" required>
+            <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" required>
 
             <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="password" required>
 
-        <input type="submit" value="SE CONNECTER">
+        <input type="submit" name="submit" value="SE CONNECTER">
     </form>
 </section>
 
