@@ -50,5 +50,3 @@ class Session{
         return $this->pseudo;
     }
 }
-
-// pour se deonnecter = unset($_SESSION["session ?? "]);

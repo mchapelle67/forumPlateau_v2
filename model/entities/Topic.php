@@ -55,6 +55,23 @@ final class Topic extends Entity{
     }
 
     /**
+     * Get the value of category
+     */ 
+    public function getCategory(){
+        return $this->category;
+    }
+
+    /**
+     * Set the value of category
+     *
+     * @return  self
+     */ 
+    public function setCategory($category){
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
      * Get the value of user
      */ 
     public function getUser(){

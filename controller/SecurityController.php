@@ -103,11 +103,11 @@ class SecurityController extends AbstractController{
 
         }
      }
+    
+    public function logout () {
         
+        // pour se deonnecter = unset($_SESSION["session ?? "]);
 
-
-    
-    
-    public function logout () {}
+    }
 }
 
