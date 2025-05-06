@@ -17,7 +17,7 @@
             <?php } ?>
             <div class="question-topic">
                 <div class="topic-user">
-                <?php foreach($users as $user ){ ?>
+                <?php foreach($topics as $topic ){ ?>
                     <p><?= $topic->getUser() ?> le <!--date et heure--></p>
                 <?php } ?>
                 </div>
