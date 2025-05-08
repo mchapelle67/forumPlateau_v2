@@ -39,7 +39,7 @@
                                     <ul class="menu">
                                         <!-- ajouter un SI admin pour l'espace -->
                                         <li><a href="">Espace admin</a></li>
-                                        <li><a href="">Se déconnecter</a></li>
+                                        <li><button><a href="index.php?ctrl=security&action=logout">Se déconnecter</a></button></li>
                                     </ul>
                                         <img src="public/img/icones/user.svg" alt="logo admin"> 
                             <?php } ?>

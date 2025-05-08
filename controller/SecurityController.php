@@ -105,9 +105,8 @@ class SecurityController extends AbstractController{
      }
     
     public function logout () {
-        
-        // pour se deonnecter = unset($_SESSION["session ?? "]);
-
+        unset($_SESSION['user']);
+            $this->redirectTo("home");
     }
 }
 
