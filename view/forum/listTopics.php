@@ -12,12 +12,12 @@
     <h1>Dernières publications.</h1>
     <div class="topic">
         <?php
-        foreach($category as $categ ){ ?>
+        foreach($category as $categ){ ?>
             <h2><?= $categ->getCategory() ?></h2>
             <?php } ?>
             <div class="question-topic">
                 <div class="topic-user">
-                <?php foreach($topics as $topic ){ ?>
+                <?php foreach($topics as $topic){ ?>
                     <p><?= $topic->getUser() ?> le <!--date et heure--></p>
                 <?php } ?>
                 </div>

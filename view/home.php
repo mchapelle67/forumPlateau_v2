@@ -1,5 +1,5 @@
 <div class="frame-1">
-    <img src="public/img/back/frame-1.png" alt="Groupes de personne s'amusants avec la citation: unis par la connaissance, guidé par l'entraide">
+    <!-- <img src="" alt="Groupes de personne s'amusants avec la citation: unis par la connaissance, guidé par l'entraide"> -->
 </div>
 
 <section class="category-icone">
