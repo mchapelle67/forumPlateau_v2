@@ -4,6 +4,7 @@ namespace App;
 abstract class Manager{
     
     protected $className = "User";
+    protected $tableName = "Users";
 
     protected function connect(){
         DAO::connect();

@@ -45,8 +45,4 @@ class Session{
         }
         return false;
     }
-
-    public function getPseudo() {
-        return $this->pseudo;
-    }
 }

@@ -18,19 +18,35 @@ class HomeController extends AbstractController implements ControllerInterface {
             "meta_description" => "Page d'accueil du forum"
         ];
     }
-        
-    public function users(){
-        $this->restrictTo("ROLE_USER");
 
-        $manager = new UserManager();
-        $users = $manager->findAll(['register_date', 'DESC']);
+    public function registerForm() {
+        return [
+            "view" => VIEW_DIR."security/registerForm.php",
+            "meta_description" => "Page d'inscription du forum"
+        ];
+    }
+
+    public function listTopics() {
+        return [
+            "view" => VIEW_DIR."forum/listTopics.php",
+            "meta_description" => "Derniers sujets"
+        ];
+    }
+
+    public function listUsers() {
+        $userManager = new \Model\Managers\UserManager();
+    $users = $userManager->findAll();
 
         return [
-            "view" => VIEW_DIR."security/users.php",
-            "meta_description" => "Liste des utilisateurs du forum",
-            "data" => [ 
-                "users" => $users 
-            ]
+            "view" => VIEW_DIR."admin/listUsers.php",
+            "meta_description" => "Liste utilisateurs"
+        ];
+    }
+
+    public function addTopic() {
+        return [
+            "view" => VIEW_DIR."forum/addTopic.php",
+            "meta_description" => "Ajouter contenus"
         ];
     }
 }

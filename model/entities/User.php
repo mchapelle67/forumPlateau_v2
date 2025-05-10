@@ -14,6 +14,8 @@ final class User extends Entity{
     private $nickName;
     private $password;
     private $pseudo;
+    private $role;
+    private $profilCreation;
 
     public function __construct($data){         
         $this->hydrate($data);        
@@ -85,12 +87,52 @@ final class User extends Entity{
     }
 
     /**
-     * Set the value of nickName
+     * Set the value of password
      *
      * @return  self
      */ 
     public function setPassword($password){
         $this->password = $password;
+
+        return $this;
+    }
+
+       /**
+     * Get the value of role
+     */ 
+    public function getRole(){
+        return $this->role;
+    }
+
+    /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role){
+        $this->role = $role;
+
+        return $this;
+    }
+
+    public function hasRole($role) {
+        return $this->role === $role;  
+    }
+
+     /**
+     * Get the value of date creation
+     */ 
+    public function getProfilCreation(){
+        return $this->profilCreation;
+    }
+
+    /**
+     * Set the value of nickName
+     *
+     * @return  self
+     */ 
+    public function setProfilCreation($profilCreation){
+        $this->profilCreation = $profilCreation;
 
         return $this;
     }

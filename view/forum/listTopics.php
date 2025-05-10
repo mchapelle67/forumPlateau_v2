@@ -1,9 +1,9 @@
 <?php
-
     $category = $result["data"]['category']; 
     $topics = $result["data"]['topics']; 
     $users = $result["data"]['users'];
 ?>
+
 <div class="frame-2">
     <img src="public/img/back/frame-2.png" alt="Mains qui se touchent dans une entraide collective avec la citation: toutes les idées, un seul lieu.">
 </div>

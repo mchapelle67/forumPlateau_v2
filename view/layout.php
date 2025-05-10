@@ -20,13 +20,13 @@
                 <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
                 <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
                 <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
-                <header>
+                <header> <?php  ?>
                     <nav>
                         <div id="nav-left">
                             <img src="public/img/logo/logo.png" alt="logo">
                         </div>
                         <div id="nav-middle">
-                            <a href="/">Accueil</a>
+                            <a href="index.php?ctrl=home">Accueil</a>
                             <a href="/">Derniers sujets</a>
                             <a href="/">Créer contenus</a>
                         </div>
@@ -37,12 +37,15 @@
                             <p><?php echo "Bienvenue, ".$user->getPseudo()."."; ?></p>
                                 <button class="burger-menu" aria-label="Menu">&#9776;</button>
                                     <ul class="menu">
-                                        <!-- ajouter un SI admin pour l'espace -->
-                                        <li><a href="">Espace admin</a></li>
+                                    <?php
+                                        if (App\Session::isAdmin()) { ?>
+                                        <li><a href="">Afficher utilisateurs</a></li> 
+                                    <?php } ?>
                                         <li><button><a href="index.php?ctrl=security&action=logout">Se déconnecter</a></button></li>
                                     </ul>
-                                        <img src="public/img/icones/user.svg" alt="logo admin"> 
-                            <?php } ?>
+                            <?php 
+                            } ?>
+                                <img src="public/img/icones/user.svg" alt="logo admin"> 
                         </div>
                     </nav>
                 </header>
@@ -73,7 +76,7 @@
             </footer>
         </div>
         <script> 
-        // pour que quand on clique sur le menu burger il puisse s'ouvrir 
+        // gère le menu burger
             document.addEventListener("DOMContentLoaded", () => {
                 const burger = document.querySelector(".burger-menu");
                 const menu = document.querySelector(".menu");

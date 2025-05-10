@@ -39,11 +39,11 @@ class SecurityController extends AbstractController{
             // on affiche un message d'erreur si l'email ou le pseudo est déjà en bdd
             if (($verifyEmail) || ($verifyPseudo)) {
             Session::addFlash("error", "Utilisateur déjà associé à l'email ou au pseudo.");
-                $this->redirectTo("register");
+                $this->redirectTo("home", "registerForm");
             // on verifie que les mdp saisis sont identiques
             } elseif ($password != $password2) {
                 Session::addFlash("error", "Les mots de passes ne sont pas identiques.");
-                $this->redirectTo("register");  
+                $this->redirectTo("home", "registerForm");  
             } else {
                 // si aucune donnée n'est déjà présente, on poursuit l'inscription
                 if ((!$verifyEmail && !$verifyPseudo) && ($password === $password2)) {
@@ -68,8 +68,8 @@ class SecurityController extends AbstractController{
 
                     } else {
                     // message d'erreur si le mot de passe ne correspond pas à la fonction regex
-                        Session::addFlash("error", "Le mot de passe n'est pas valide. <br>Il doit au comporter au minimum: <br> - 1 minuscule,<br> - 1 majuscule,<br> - 1 chiffre<br>, - 8 caractères.");
-                        $this->redirectTo("register");  
+                        Session::addFlash("error", "Le mot de passe n'est pas valide. <br>Il doit au comporter au minimum: <br> - 1 minuscule,<br> - 1 majuscule,<br> - 1 chiffre,<br> - 8 caractères.");
+                        $this->redirectTo("home", "registerForm");  
                     }
                     
                 }
@@ -107,6 +107,13 @@ class SecurityController extends AbstractController{
     public function logout () {
         unset($_SESSION['user']);
             $this->redirectTo("home");
+    }
+
+    public function deleteUser($id) {
+        $userManager = new UserManager() ;
+        $userManager->delete($id);
+
+        $this->redirectTo("forum", "listUsers");
     }
 }
 
