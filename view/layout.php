@@ -27,19 +27,18 @@
                         </div>
                         <div id="nav-middle">
                             <a href="index.php?ctrl=home">Accueil</a>
-                            <a href="/">Derniers sujets</a>
-                            <a href="/">Créer contenus</a>
-                        </div>
-                        <div id="nav-right">
-                            <?php
-                            if(App\Session::getUser()){                                 
+                            <?php if(App\Session::getUser()){                                 
                                 $user = App\Session::getUser(); ?>
+                            <a href="index.php?ctrl=forum&action=listTopics">Derniers sujets</a>
+                            <a href="index.php?ctrl=forum&action=addTopics">Créer contenus</a>
+                        </div>
+                        <div id="nav-right">                            
                             <p><?php echo "Bienvenue, ".$user->getPseudo()."."; ?></p>
                                 <button class="burger-menu" aria-label="Menu">&#9776;</button>
                                     <ul class="menu">
                                     <?php
                                         if (App\Session::isAdmin()) { ?>
-                                        <li><a href="">Afficher utilisateurs</a></li> 
+                                        <li><a href="index.php?ctrl=forum&action=listUsers">Afficher utilisateurs</a></li> 
                                     <?php } ?>
                                         <li><button><a href="index.php?ctrl=security&action=logout">Se déconnecter</a></button></li>
                                     </ul>
@@ -91,7 +90,7 @@
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous">
         </script>
-        <script>
+        <!-- <script>
             $(document).ready(function(){
                 $(".message").each(function(){
                     if($(this).text().length > 0){
@@ -118,7 +117,7 @@
                     content_css: '//www.tiny.cloud/css/codepen.min.css'
                 });
             })
-        </script>
+        </script> -->
         <script src="<?= PUBLIC_DIR ?>/js/script.js"></script>
     </body>
 </html>

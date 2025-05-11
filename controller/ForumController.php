@@ -8,6 +8,7 @@ use App\Manager;
 use Model\Managers\CategoryManager;
 use Model\Managers\TopicManager;
 use Model\Managers\UserManager;
+use Model\Managers\PostManager;
 use App\DAO;
 
 class ForumController extends AbstractController implements ControllerInterface{
@@ -37,7 +38,7 @@ class ForumController extends AbstractController implements ControllerInterface{
     //     $topics = $topicManager->findTopicsByCategory($id);
 
     //     return [
-    //         "view" => VIEW_DIR."forum/listTopics.php",
+    //         "view" => VIEW_DIR."forum/listByCategory.php",
     //         "meta_description" => "Liste des topics par catégorie : ".$category,
     //         "data" => [
     //             "category" => $category,
@@ -47,23 +48,18 @@ class ForumController extends AbstractController implements ControllerInterface{
     // }
 
     public function listTopics() {
-        DAO::connect();
-
         $topicManager = new TopicManager();
-        $categoryManager = new CategoryManager();
-        $userManager = new UserManager;
+        $postManager = new PostManager();
 
-        $category = $categoryManager->findAll();
         $topics = $topicManager->findAll();
-        $users = $userManager->findAll();
+        $posts = $postManager->findAll();
 
         return [
             "view" => VIEW_DIR."forum/listTopics.php",
             "meta_description" => "Liste des topics.",
             "data" => [
-                "category" => $category,
                 "topics" => $topics,
-                "users" => $users
+                "posts" => $posts
             ]
         ];
     }
@@ -72,7 +68,6 @@ class ForumController extends AbstractController implements ControllerInterface{
         $userManager = new UserManager();
         $users = $userManager->findAll();
         
-        $userManager = new UserManager();
         return [
             "view" => VIEW_DIR."admin/listUsers.php",
             "meta_description" => "Liste des utilisateurs",
@@ -82,6 +77,16 @@ class ForumController extends AbstractController implements ControllerInterface{
             ];
     }
 
-    public function addTopic() {
+    public function listCategoryAddTopic() {
+        $categoryManager = new CategoryManager();
+        $category = $categoryManager->findAll();
+
+        return [
+            "view" => VIEW_DIR."forum/addTopic.php",
+            "meta_description" => "Ajouter un sujet",
+            "data" => [
+                "category" => $category
+            ]
+        ];
     }
 }

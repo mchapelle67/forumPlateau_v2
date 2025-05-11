@@ -34,9 +34,6 @@ class HomeController extends AbstractController implements ControllerInterface {
     }
 
     public function listUsers() {
-        $userManager = new \Model\Managers\UserManager();
-    $users = $userManager->findAll();
-
         return [
             "view" => VIEW_DIR."admin/listUsers.php",
             "meta_description" => "Liste utilisateurs"

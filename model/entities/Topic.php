@@ -13,7 +13,7 @@ final class Topic extends Entity{
     private $title;
     private $user;
     private $category;
-    private $creationDate;
+    private $topicCreation;
     private $closed;
 
     public function __construct($data){         
@@ -90,5 +90,30 @@ final class Topic extends Entity{
 
     public function __toString(){
         return $this->title;
+    }
+
+    /**
+     * Get the value of date creation
+     */ 
+    public function getTopicCreation(){
+        return $this->topicCreation;
+    }
+
+    /**
+     * Set the value of date creation
+     *
+     * @return  self
+     */ 
+    public function setTopicCreation($topicCreation){
+        // on met la date en fr
+        // $formatter = new \IntlDateFormatter('fr_FR', \IntlDateFormatter::LONG, \IntlDateFormatter::SHORT);
+        // $formatter->setPattern("d MMMM yyyy, HH:mm");
+
+        // $topicCreation = $formatter->format(new \DateTime($this->topicCreation));
+
+        
+        $this->topicCreation = $topicCreation;
+        return $this;
+
     }
 }

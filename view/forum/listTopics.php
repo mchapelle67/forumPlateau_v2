@@ -1,38 +1,38 @@
 <?php
-    $category = $result["data"]['category']; 
     $topics = $result["data"]['topics']; 
-    $users = $result["data"]['users'];
+    $posts = $result["data"]["posts"]
 ?>
 
 <div class="frame-2">
-    <img src="public/img/back/frame-2.png" alt="Mains qui se touchent dans une entraide collective avec la citation: toutes les idées, un seul lieu.">
 </div>
 
 <sections class="list-topics"> 
-    <h1>Dernières publications.</h1>
-    <div class="topic">
-        <?php
-        foreach($category as $categ){ ?>
-            <h2><?= $categ->getCategory() ?></h2>
-            <?php } ?>
+    <h1>Dernières <span class="red-word-h1">publications</span>.</h1>
+        <button><a href="">Voir sujet par contenus</a></button>
+        <?php foreach($topics as $topic) { ?>
+        <div class="topic">
+            <h2> <?= $topic->getCategory(); ?></h2>
             <div class="question-topic">
-                <div class="topic-user">
-                <?php foreach($topics as $topic){ ?>
-                    <p><?= $topic->getUser() ?> le <!--date et heure--></p>
-                <?php } ?>
-                </div>
-                <div class="content-topic">
-                    <p><!--question --><p>
-                </div>
-            </div>
-            <div class="topic-answer">
                 <div class="topic-user"> 
-                    <!-- refaire un foreach pour les commentaires avec  getMultipleResults-->
-                    <p><?= $topic->getUser() ?> le <!--date et heure--></p>
+                    <p><?= $topic->getUser()->getPseudo()." le ". $topic->getTopicCreation(); ?></p>
                 </div>
                 <div class="content-topic">
-                    <p><!--réponse --><p>
+                    <p><?= $topic->getTitle(); ?></p>
                 </div>
             </div>
-    </div>
+            <?php } 
+                foreach ($posts as $post) { ?>
+                <div class="topic-answer">
+                    <div class="topic-user"> 
+                        <p><?= $post->getUser(); ?></p>
+                    </div>
+                    <div class="content-topic">
+                        <p><?= $post->getText(); ?><p>
+                    </div>
+              </div>
+            <?php } ?>
+            <div class="post">
+                <h3>COMMENTER</h3>
+            </div>
+        </div>
 </section>

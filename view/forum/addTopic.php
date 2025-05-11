@@ -1,24 +1,26 @@
+<?php
+    $category = $result["data"]['category']; 
+?>
+
 <section class="add-form">
-    <form action="/manon_CHAPELLE/forumPlateau_V2/index.php?ctrl=security&action=add" method="POST">
-        <h1>Rejoindre la<br><span class='red-word-h2'>communauté</span>.</h1>
+    <form action="index.php?ctrl=security&action=add" method="POST">
+        <h1>AJOUTER UN<br><span class='red-word-h3'>CONTENUS</span>.</h1>
+
             <div class="content-form">
-                <label for="pseudo">Pseudo</label>
-                    <input type="text" name="pseudo" id="pseudo" required>
+                <label for="category">Catégorie</label>
+                    <select name="category" id="category" required>
+                <?php foreach ($category as $categ) { ?>
+                    <option value="<?= $categ->getId() ?>"><?= $categ->getName()?></option>
+                <?php } ?>
+                    </select>
             </div>
-            <div class="content-form">
-                <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" required>
-            </div>
-            <div class="content-form">
-                <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" required>
-            </div>
-            <div class="content-form">
-                <label for="password2">Vérifier mot de passe</label>
-                    <input type="password" name="password2" id="password2" required>
+
+            <div class="content-form add-topic">
+                <label for="title">Sujet</label>
+                    <textarea name="title" id="title" required></textarea>
             </div>
             <div class="button-form">
-                <input type="submit" name="submit" value="S'INSCRIRE">
+                <input type="submit" name="submit" value="Créer sujet">
             </div>
     </form>
 </section>
