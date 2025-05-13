@@ -14,6 +14,7 @@ abstract class AbstractController{
 
     public function index() {}
 
+// redirection simplifiée = redirectTo('controller', 'view')
     public function redirectTo($ctrl = null, $action = null, $id = null){
 
         $url = $ctrl ? "?ctrl=".$ctrl : "";
@@ -24,6 +25,7 @@ abstract class AbstractController{
         die();
     }
 
+// restreindre une action à un role
     public function restrictTo($role){
         
         if(!Session::getUser() || !Session::getUser()->hasRole($role)){

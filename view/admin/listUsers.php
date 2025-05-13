@@ -4,7 +4,7 @@
     $users = $result["data"]["users"];
 ?>
 
-<section class="list-user">
+<section class="list">
 <h1>Liste des utilisateurs.</h1>
 
 <?php if (Session::getUser() && Session::isAdmin()) {

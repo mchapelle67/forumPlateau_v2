@@ -37,6 +37,25 @@ final class Topic extends Entity{
         return $this;
     }
 
+
+    /**
+     * Get the value of statue
+     */ 
+    public function getClosed(){
+        return $this->closed;
+    }
+
+    /**
+     * Set the value of statue
+     *
+     * @return  self
+     */ 
+    public function setClosed($closed){
+        $this->closed = $closed;
+        return $this;
+    }
+
+
     /**
      * Get the value of title
      */ 

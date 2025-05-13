@@ -49,6 +49,6 @@
     </section>
         <div class="register-link">
             <h3>Pas encore inscrit ?</h3>
-            <button><a href="index.php?ctrl=home&action=registerForm">NOUS REJOINDRE</a></button>
+            <button><a href="index.php?ctrl=security&action=registerForm">NOUS REJOINDRE</a></button>
         </div>
 </section>

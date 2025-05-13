@@ -12,6 +12,7 @@ final class Post extends Entity{
     private $id;
     private $text;
     private $user;
+    private $topic_id;
 
 
     public function __construct($data){         
@@ -40,6 +41,20 @@ final class Post extends Entity{
         return $this->text;
     }
 
+
+
+    public function setTopic($topic_id){
+        $this->topic_id = $topic_id;
+        return $this;
+    }
+
+ 
+    public function getTopic(){
+        return $this->topic_id;
+    }
+
+
+
     /**
      * Set the value 
      *
@@ -63,6 +78,22 @@ final class Post extends Entity{
     public function setUser($user){
         $this->user = $user;
         return $this;
+    }
+
+
+    /**
+     * Set the date 
+     *
+     * @return  self
+     */ 
+    public function setCreationPost($creationPost){
+        $this->creationPost = $creationPost;
+        return $this;
+    }
+
+ 
+    public function getCreationPost(){
+        return $this->creationPost;
     }
 
 }

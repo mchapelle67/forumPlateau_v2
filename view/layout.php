@@ -30,7 +30,7 @@
                             <?php if(App\Session::getUser()){                                 
                                 $user = App\Session::getUser(); ?>
                             <a href="index.php?ctrl=forum&action=listTopics">Derniers sujets</a>
-                            <a href="index.php?ctrl=forum&action=addTopics">Créer contenus</a>
+                            <a href="index.php?ctrl=forum&action=listCategories">Liste des Categories</a>
                         </div>
                         <div id="nav-right">                            
                             <p><?php echo "Bienvenue, ".$user->getPseudo()."."; ?></p>
@@ -38,7 +38,7 @@
                                     <ul class="menu">
                                     <?php
                                         if (App\Session::isAdmin()) { ?>
-                                        <li><a href="index.php?ctrl=forum&action=listUsers">Afficher utilisateurs</a></li> 
+                                        <li><a href="index.php?ctrl=security&action=listUsers">Afficher utilisateurs</a></li> 
                                     <?php } ?>
                                         <li><button><a href="index.php?ctrl=security&action=logout">Se déconnecter</a></button></li>
                                     </ul>

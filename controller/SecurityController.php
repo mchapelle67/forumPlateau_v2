@@ -7,11 +7,13 @@ use App\Autoloader;
 use App\DAO;
 use App\Session;
 use Model\Managers\UserManager;
-
+use Model\Managers\TopicManager;
+use Model\Managers\PostManager;
+use Model\Managers\CategoryManager;
 
 
 class SecurityController extends AbstractController{
-    // contiendra les méthodes liées à l'authentification : register, login et logout
+// contiendra les méthodes liées à l'authentification et à la gestion
 
     public function register() {
         // connexion à la base
@@ -51,8 +53,8 @@ class SecurityController extends AbstractController{
                     // (?=.*[a-z]) → au moins une lettre minuscule
                     // (?=.*[A-Z]) → au moins une lettre majuscule
                     // (?=.*\d) → au moins un chiffre
-                    // .{8,} → minimum 8 caractères
-                    if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/", $password)) {  
+                    // .{12,} → minimum 12 caractères
+                    if (preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{12,}$/", $password)) {  
 
                     // si toutes ces étapes sont passés, on insere les données dans la bdd et on valide l'inscription
                     $sql = "INSERT INTO user (pseudo, email, password, profilCreation) VALUES (:pseudo, :email, :password, NOW())";
@@ -68,7 +70,7 @@ class SecurityController extends AbstractController{
 
                     } else {
                     // message d'erreur si le mot de passe ne correspond pas à la fonction regex
-                        Session::addFlash("error", "Le mot de passe n'est pas valide. <br>Il doit au comporter au minimum: <br> - 1 minuscule,<br> - 1 majuscule,<br> - 1 chiffre,<br> - 8 caractères.");
+                        Session::addFlash("error", "Le mot de passe n'est pas valide. <br>Il doit au comporter au minimum: <br> - 1 minuscule,<br> - 1 majuscule,<br> - 1 chiffre,<br> - 12 caractères.");
                         $this->redirectTo("home", "registerForm");  
                     }
                     
@@ -98,22 +100,111 @@ class SecurityController extends AbstractController{
             Session::addFlash("success", "Bienvenue, ".$user->getPseudo());
             $this->redirectTo('home');
         } else {
-            Session::addFlash("error", "Mot de passe ou e-mail inccorect.");
+            Session::addFlash("error", "Mot de passe ou e-mail incorrect.");
             $this->redirectTo("home");
 
         }
      }
-    
+
+
+// on permet à l'user de se deconnecter
     public function logout () {
         unset($_SESSION['user']);
             $this->redirectTo("home");
     }
 
+    
+// affichage du formulaire d'inscription
+    public function registerForm() {
+        return [
+            "view" => VIEW_DIR."security/registerForm.php",
+            "meta_description" => "Page d'inscription du forum"
+        ];
+    }
+    
+
+// affichage de la listes et users (visible uniquement par l'admin) ... 
+    public function listUsers() {
+        $userManager = new UserManager();
+        $users = $userManager->findAll();
+        
+        return [
+            "view" => VIEW_DIR."admin/listUsers.php",
+            "meta_description" => "Liste des utilisateurs",
+            "data" => [
+                "users" => $users
+                ]
+            ];
+        }
+        
+//  ... et la possibilité de supprimer un user (toujours que pour un admin)
     public function deleteUser($id) {
         $userManager = new UserManager() ;
         $userManager->delete($id);
-
-        $this->redirectTo("forum", "listUsers");
+        
+        $this->redirectTo("security", "listUsers");
     }
-}
 
+// suppression d'un sujet par un admin OU par l'user ayant crée le sujet 
+    public function deleteTopic($id) {
+        $topicManager = new TopicManager() ;
+        $topicManager->delete($id);
+        
+        $this->redirectTo("forum", "listTopics");
+    }
+
+// suppression d'un commentaire par un admin OU par l'user ayant crée le commentaire 
+
+    public function deletePost($id) {
+        $postManager = new PostManager() ;
+        $postManager->delete($id);
+        
+        $this->redirectTo("forum", "listTopics");
+    }
+
+//  affichage de formulaire d'update de sujet 
+    public function updateTopicForm($id) {
+        $topicManager = new TopicManager();
+        $categoriesManager = new CategoryManager;
+        
+        
+        $topic = $topicManager->findOneById($id);
+        
+        $category_id = $topic->getCategory();
+        $categories = $categoriesManager->findAll();
+        
+        
+        return [
+            "view" => VIEW_DIR."admin/updateTopicForm.php",
+            "meta_description" => "Modification d'un sujet",
+            "data" => [
+                "topic" => $topic,
+                "categories" => $categories,
+                "categoryById" => $categoryById
+                ]
+            ];
+        }
+        
+    
+// modification d'un sujet par un admin OU par l'user ayant crée le sujet 
+    public function updateTopic($id) {        
+        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $topicManager = new TopicManager();
+      
+        $sql = "UPDATE topic SET title = :title, closed = :closed, category_id = :category WHERE id_topic = :id";
+                
+            DAO::update($sql,[
+            'title' => $title,
+            'closed' => $_POST['closed'],
+            'category' => $_POST['category'],
+            'id' => $id
+        ]);
+
+
+        $this->redirectTo("forum", "listTopics");
+
+    }
+
+}
+    

@@ -18,32 +18,5 @@ class HomeController extends AbstractController implements ControllerInterface {
             "meta_description" => "Page d'accueil du forum"
         ];
     }
-
-    public function registerForm() {
-        return [
-            "view" => VIEW_DIR."security/registerForm.php",
-            "meta_description" => "Page d'inscription du forum"
-        ];
-    }
-
-    public function listTopics() {
-        return [
-            "view" => VIEW_DIR."forum/listTopics.php",
-            "meta_description" => "Derniers sujets"
-        ];
-    }
-
-    public function listUsers() {
-        return [
-            "view" => VIEW_DIR."admin/listUsers.php",
-            "meta_description" => "Liste utilisateurs"
-        ];
-    }
-
-    public function addTopic() {
-        return [
-            "view" => VIEW_DIR."forum/addTopic.php",
-            "meta_description" => "Ajouter contenus"
-        ];
-    }
+    
 }

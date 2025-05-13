@@ -4,7 +4,7 @@ namespace App;
 abstract class Manager{
     
     protected $className = "User";
-    protected $tableName = "Users";
+    protected $tableName = "user";
 
     protected function connect(){
         DAO::connect();
@@ -25,7 +25,7 @@ abstract class Manager{
         $sql = "SELECT *
                 FROM ".$this->tableName." a
                 ".$orderQuery;
-
+        
         return $this->getMultipleResults(
             DAO::select($sql), 
             $this->className
